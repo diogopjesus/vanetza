@@ -12,7 +12,7 @@
 #include <limits>
 #undef min
 
-#define VANETZA_USE_ITS2 1
+#define VANETZA_USE_ITS2 @VANETZA_USE_ITS2@
 
 #if VANETZA_USE_ITS2
 #define PathDeltaTime_tenMilliSecondsInPast 1

@@ -52,11 +52,21 @@ units::Length distance(const ReferencePosition_t& a, const ReferencePosition_t& 
 units::Length distance(const ReferencePosition_t& a, units::GeoAngle lat, units::GeoAngle lon);
 
 /**
+ * Calculate distance between positions
+ * \param a one position
+ * \param b another position
+ * \return distance between given positions (or NaN if some position is unavailable)
+ */
+units::Length distance(const ReferencePositionWithConfidence_t& a, const ReferencePositionWithConfidence_t& b);
+units::Length distance(const ReferencePositionWithConfidence_t& a, units::GeoAngle lat, units::GeoAngle lon);
+
+/**
  * Check if ASN.1 data element indicates unavailable value
  * \return true if value is available
  */
 bool is_available(const Heading&);
 bool is_available(const ReferencePosition_t&);
+bool is_available(const ReferencePositionWithConfidence_t& pos);
 
 /**
  * Copy position information into a ReferencePosition structure from CDD
