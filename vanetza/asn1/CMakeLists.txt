@@ -1,10 +1,10 @@
-set(_its_asn1_source_file "asn1c_its_sources.txt")
+set(_its_asn1_source_file "asn1c_its1_sources.txt")
 set(_its2_asn1_source_file "asn1c_its2_sources.txt")
 set(_pki_asn1_source_file "asn1c_pki_sources.txt")
 set(_sec_asn1_source_file "asn1c_security_sources.txt")
 set(_support_asn1_source_file "asn1c_support_sources.txt")
 
-set(_its_asn1_dir "${CMAKE_CURRENT_SOURCE_DIR}/its")
+set(_its_asn1_dir "${CMAKE_CURRENT_SOURCE_DIR}/its1")
 set(_its2_asn1_dir "${CMAKE_CURRENT_SOURCE_DIR}/its2")
 set(_pki_asn1_dir "${CMAKE_CURRENT_SOURCE_DIR}/pki")
 set(_sec_asn1_dir "${CMAKE_CURRENT_SOURCE_DIR}/security")
@@ -30,7 +30,7 @@ if(VANETZA_ASN1_WITH_ASN1C)
         ${PROJECT_SOURCE_DIR}/asn1/TS103301v211-SPATEM.asn
     )
 
-    option(VANETZA_ASN1_WITH_ISO "Fetch ISO ASN.1 files for a more complete ITS message set" OFF)
+    option(VANETZA_ASN1_WITH_ISO "Fetch ISO ASN.1 files for a more complete ITS-1 message set" OFF)
     if(VANETZA_ASN1_WITH_ISO)
         set(_iso_asn1_files ISO14816.asn ISO19091.asn ISO24534-3.asn)
         list(TRANSFORM _iso_asn1_files PREPEND ${PROJECT_BINARY_DIR}/iso/)
@@ -86,11 +86,11 @@ if(VANETZA_ASN1_WITH_ASN1C)
         DEPENDS ${_its_asn1_files}
         COMMAND ${CMAKE_COMMAND} -E make_directory ${_its_asn1_dir}
         COMMAND ${ASN1C_EXECUTABLE} ${_asn1c_flags} -R -D ${_its_asn1_dir} ${_its_asn1_files} test.asn
-        COMMENT "Generating code from ITS application ASN.1 modules (CDD, CA, DEN)" VERBATIM
+        COMMENT "Generating code from ITS-1 application ASN.1 modules (CDD, CA, DEN)" VERBATIM
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
     add_custom_command(OUTPUT "${_its_asn1_source_file}"
         DEPENDS ${_its_asn1_dir}
-        COMMAND ${CMAKE_COMMAND} -DASN1C_OUTPUT_DIR=its -DASN1C_SOURCE_FILE=${_its_asn1_source_file}
+        COMMAND ${CMAKE_COMMAND} -DASN1C_OUTPUT_DIR=its1 -DASN1C_SOURCE_FILE=${_its_asn1_source_file}
             -P collect_asn1c_sources.cmake
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} VERBATIM)
 
@@ -144,7 +144,7 @@ if(VANETZA_ASN1_WITH_ASN1C)
     add_custom_command(TARGET generate_asn1c POST_BUILD
         COMMAND ${CMAKE_COMMAND} -DPROJECT_SOURCE_DIR=${PROJECT_SOURCE_DIR}
             -P ${CMAKE_CURRENT_SOURCE_DIR}/patch_asn1c_generated.cmake
-        COMMENT "Patching generated ITS application asn1c files"
+        COMMENT "Patching generated ITS-1 application asn1c files"
         WORKING_DIRECTORY ${_its_asn1_dir} VERBATIM)
     add_custom_command(TARGET generate_asn1c POST_BUILD
         COMMAND ${CMAKE_COMMAND} -DPROJECT_SOURCE_DIR=${PROJECT_SOURCE_DIR}
@@ -170,7 +170,7 @@ if(VANETZA_ASN1_WITH_ASN1C)
         add_custom_command(TARGET generate_asn1c POST_BUILD
             COMMAND ${CMAKE_COMMAND} -DPATCH_DIRECTORY=${CMAKE_CURRENT_SOURCE_DIR}/patches/iso
                 -P ${CMAKE_CURRENT_SOURCE_DIR}/apply_patches.cmake
-                COMMENT "Applying hot-fixes to generated asn1c ITS ISO files"
+                COMMENT "Applying hot-fixes to generated asn1c ITS-1 ISO files"
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} VERBATIM)
     endif()
 
