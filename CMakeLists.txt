@@ -70,6 +70,13 @@ if (VANETZA_WITH_OPENSSL)
   include(CompatOpenSSLTargets)
 endif()
 
+option(VANETZA_ASN1_WITH_ITS2 "Enable ITS-2 ASN.1 files" OFF)
+if(VANETZA_ASN1_WITH_ITS2)
+  set(VANETZA_USE_ITS2 1)
+else()
+  set(VANETZA_USE_ITS2 0)
+endif()
+
 add_subdirectory(vanetza/access)
 add_subdirectory(vanetza/asn1)
 add_subdirectory(vanetza/btp)
