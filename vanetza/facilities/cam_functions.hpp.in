@@ -1,7 +1,7 @@
 #ifndef CAM_FUNCTIONS_HPP_PUFKBEM8
 #define CAM_FUNCTIONS_HPP_PUFKBEM8
 
-#define VANETZA_USE_ITS2 1
+#define VANETZA_USE_ITS2 @VANETZA_USE_ITS2@
 
 #include <vanetza/asn1/its/AltitudeConfidence.h>
 #include <vanetza/asn1/its/AltitudeValue.h>

@@ -12,8 +12,6 @@
 #include <limits>
 #undef min
 
-#define VANETZA_USE_ITS2 @VANETZA_USE_ITS2@
-
 #if VANETZA_USE_ITS2
 #define PathDeltaTime_tenMilliSecondsInPast 1
 #define Latitude_oneMicrodegreeNorth 10
@@ -158,6 +156,7 @@ units::Length distance(const ReferencePosition_t& a, units::GeoAngle lat, units:
     return length;
 }
 
+#if VANETZA_USE_ITS2
 units::Length distance(const ReferencePositionWithConfidence_t& a, const ReferencePositionWithConfidence_t& b)
 {
     using geonet::GeodeticPosition;
@@ -194,6 +193,7 @@ units::Length distance(const ReferencePositionWithConfidence_t& a, units::GeoAng
     }
     return length;
 }
+#endif
 
 bool is_available(const Heading& hd)
 {
@@ -205,10 +205,12 @@ bool is_available(const ReferencePosition& pos)
     return pos.latitude != Latitude_unavailable && pos.longitude != Longitude_unavailable;
 }
 
+#if VANETZA_USE_ITS2
 bool is_available(const ReferencePositionWithConfidence_t& pos)
 {
     return pos.latitude != Latitude_unavailable && pos.longitude != Longitude_unavailable;
 }
+#endif
 
 template<typename T, typename U>
 long round(const boost::units::quantity<T>& q, const U& u)
