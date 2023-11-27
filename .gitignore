@@ -1,8 +1,9 @@
+.vscode/
 build
 build.asn1
 conanfile.pyc
 doxygen/html/
 www/
-.vscode/
 vanetza/asn1/cpm.hpp
+vanetza/asn1/its/*
 vanetza/facilities/cam_functions.cpp
